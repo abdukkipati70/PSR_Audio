@@ -17,3 +17,5 @@ fatfs middleware
 - make a folder
 
 when holding down, continuously play so figure out a way to loop
+
+48 MHz
