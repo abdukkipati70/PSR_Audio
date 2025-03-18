@@ -1,21 +1,35 @@
-load using dac
+# Audio Playback System Notes  
 
-use dma
+## DAC & DMA  
+- Load audio using DAC  
+- Use DMA to transfer data without CPU involvement (event-triggered)  
+- Target MCU: STM32G0  
 
-- copy data wo cpu, event triggered
+## Buffering  
+- Use a double buffer: load one while playing the other  
+- 16 sounds total  
 
-- stm32g0
+## Storage  
+- Use a microSD card  
+- FATFS middleware  
+- Create a dedicated folder for sounds  
+- Raw data stored on SD card  
+- Filenames are in hexadecimal  
 
-use a buffer to load one while playing other
+## Playback Logic  
+- Continuous playback when holding down a button → implement looping  
 
-16 sounds
+## Button Input  
+- Button value comes from CAN (currently just a boolean)  
+- 4 GPIOs for 4-bit input  
+- Use interrupts to detect button presses  
 
-micro sd
+## Audio Output  
+- LM356 buffer to receive DAC signal for playback  
+- Likely <1 gain op-amp (LM324, quad op-amp)  
+- 3.5mm jack may introduce other voltage considerations  
 
-fatfs middleware
-
-- make a folder
-
-when holding down, continuously play so figure out a way to loop
-
-48 MHz
+## Additional Considerations  
+- Use a timer for double buffer reading  
+- Wavetable for testing  
+- Power: 5V for everything  
